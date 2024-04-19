@@ -6,6 +6,7 @@ import 'package:dishdash/components/my_food_tile.dart';
 import 'package:dishdash/components/my_tab_bar.dart';
 import 'package:dishdash/models/food.dart';
 import 'package:dishdash/models/restaurant.dart';
+import 'package:dishdash/screens/food_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,8 +51,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           itemBuilder: (context, index) {
             final food = categoryMenu[index];
 
-
-          return FoodTile(food: food, onTap: () {},);
+          return FoodTile(food: food, onTap: () =>
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => FoodScreen(food: food)
+              )),
+          );
           },
       );
     }).toList();

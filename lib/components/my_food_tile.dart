@@ -27,7 +27,7 @@ class FoodTile extends StatelessWidget {
                         // NAME OF FOOD ITEM-----------------
                         Text(
                             food.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -41,7 +41,7 @@ class FoodTile extends StatelessWidget {
                           ),
                         ),
 
-                        SizedBox(height: 11),
+                        const SizedBox(height: 11),
 
                         // DESCRIPTION OF FOOD ITEM------------
                         Text(food.description),
@@ -49,7 +49,7 @@ class FoodTile extends StatelessWidget {
                     )
                 ),
 
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 // FOOD IMAGE---------
                 Image.asset(
                     food.imagePath,
