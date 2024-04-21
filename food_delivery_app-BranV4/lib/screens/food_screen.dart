@@ -1,17 +1,42 @@
 import 'package:dishdash/components/my_button.dart';
+import 'package:dishdash/models/restaurant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/food.dart';
 
 class FoodScreen extends StatefulWidget {
-  const FoodScreen({super.key, required this.food});
-
   final Food food;
+
+  final Map<Addon, bool> selectedAddons = {};
+
+  FoodScreen({super.key, 
+  required this.food}){
+    for(Addon addon in food.availableAddons){
+      selectedAddons[addon] = false;
+    }
+  }
+
 
   @override
   State<FoodScreen> createState() => _FoodScreenState();
 }
 
 class _FoodScreenState extends State<FoodScreen> {
+
+  //add to cart function
+  void addToCart(Food food, Map<Addon, bool> selectedAddons){
+    //close food screen and back to menu
+    Navigator.pop(context);
+    List<Addon> currentlySelectedAddons = [];
+    for (Addon addon in widget.food.availableAddons){
+      if(widget.selectedAddons[addon]==true){
+        currentlySelectedAddons.add(addon);
+      }
+    }
+    context.read<Restaurant>().addToCart(food, currentlySelectedAddons);
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +98,7 @@ class _FoodScreenState extends State<FoodScreen> {
                   // BUTTON -> ADD TO CART----------
                   MyButton(
                       text: 'Add To Cart',
-                      onTap: () {},
+                      onTap: () => addToCart(widget.food, widget.selectedAddons),
                   ),
                 ],
               ),

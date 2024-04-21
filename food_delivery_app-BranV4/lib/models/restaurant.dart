@@ -13,6 +13,12 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/main/burger.png',
       price: 4.99,
       category: FoodCategory.main,
+      availableAddons: [ 
+        Addon(name:"Spicy Ketchup", price:0.50),
+        Addon(name:"Mustard", price:0.50),
+        Addon(name:"Mushrooms", price:1.20),
+        Addon(name:"Extra Cheese", price:0.99)
+      ] ,
     ),
     Food(
       name: 'Chicken',
@@ -20,6 +26,11 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/main/chicken.png',
       price: 5.99,
       category: FoodCategory.main,
+      availableAddons: [ 
+        Addon(name:"Sauteed Onions", price:0.89),
+        Addon(name:"Roasted Garlic", price:0.70),
+        Addon(name: "Small Rice", price: 1.20)
+      ] ,
     ),
     Food(
       name: 'Pasta',
@@ -27,6 +38,12 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/main/pasta.png',
       price: 7.99,
       category: FoodCategory.main,
+      availableAddons: [ 
+        Addon(name:"Meatballs", price:2.50),
+        Addon(name:"Grilled Chicken", price:2.00),
+        Addon(name:"Cheese", price:1.20),
+        Addon(name:"Garlic Bread", price:1.00)
+      ] ,
     ),
     Food(
       name: 'Pizza',
@@ -34,6 +51,14 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/main/pizza.png',
       price: 6.99,
       category: FoodCategory.main,
+      availableAddons: [ 
+        Addon(name:"Extra Chesse", price:0.50),
+        Addon(name:"Sausage", price:1.50),
+        Addon(name:"Pepperoni", price:1.50),
+        Addon(name:"Mushrooms", price:1.20),
+        Addon(name: "Olives", price: 0.50),
+        Addon(name: "Pineapple", price: 1.00)
+      ] ,
     ),
     Food(
       name: 'Steak',
@@ -41,6 +66,11 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/main/steak.png',
       price: 9.99,
       category: FoodCategory.main,
+      availableAddons: [ 
+        Addon(name:"Garlic Butter", price:0.50),
+        Addon(name:"Sauteed Onions", price:0.80),
+        Addon(name:"Steak Sauce", price:1.00),
+      ] ,
     ),
 
     // SIDE COURSE MENU-----------------------------------------
@@ -50,6 +80,10 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/side/fries.png',
       price: 1.99,
       category: FoodCategory.side,
+      availableAddons: [ 
+        Addon(name:"Melted Cheese", price:0.50),
+        Addon(name:"Bacon", price:1.00),
+      ] ,
     ),
     Food(
       name: 'Rice',
@@ -57,6 +91,9 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/side/rice.png',
       price: 0.99,
       category: FoodCategory.side,
+      availableAddons: [ 
+        Addon(name:"None", price:0.00),
+      ] ,
     ),
     Food(
       name: 'Rolls',
@@ -64,6 +101,9 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/side/rolls.png',
       price: 2.99,
       category: FoodCategory.side,
+      availableAddons: [ 
+        Addon(name:"Butter", price:0.50),
+      ] ,
     ),
     Food(
       name: 'Salad',
@@ -71,6 +111,16 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/side/salad.png',
       price: 1.99,
       category: FoodCategory.side,
+      availableAddons: [ 
+        Addon(name:"Fried Onions", price:0.50),
+        Addon(name:"Chicken", price:1.50),
+        Addon(name:"Bacon", price:1.10),
+        Addon(name:"Extra Tomato", price:0.99),
+        Addon(name: "Ranch Dressing", price: 0.20),
+        Addon(name: "Italian Dressing", price: 0.20),
+        Addon(name: "Olives", price: 1.00),
+        Addon(name: "Egg", price: 0.05)
+      ] ,
     ),
     Food(
       name: 'Soup',
@@ -78,6 +128,11 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/side/soup.png',
       price: 1.99,
       category: FoodCategory.side,
+      availableAddons: [ 
+        Addon(name:"Hot Sauce", price:0.20),
+        Addon(name:"Parmesam", price:0.20),
+        Addon(name:"BreadStick", price:1.00),
+      ] ,
     ),
 
     // DESSERT COURSE MENU--------------------------------------
@@ -87,6 +142,11 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/desert/cake.png',
       price: 3.99,
       category: FoodCategory.dessert,
+      availableAddons: [ 
+        Addon(name:"Chocolate Chips", price:0.50),
+        Addon(name:"Strawberry Jam", price:0.50),
+        Addon(name:"Caramel Drizzle", price:0.50),
+      ] ,
     ),
     Food(
       name: 'Cookies',
@@ -94,6 +154,9 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/desert/cookies.png',
       price: 2.99,
       category: FoodCategory.dessert,
+      availableAddons: [ 
+        Addon(name:"Scoop of Ice Cream", price:1.00),
+      ] ,
     ),
     Food(
       name: 'Fruit',
@@ -101,6 +164,9 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/desert/fruit.png',
       price: 1.99,
       category: FoodCategory.dessert,
+      availableAddons: [ 
+        Addon(name:"None", price:0.00),
+      ] ,
     ),
     Food(
       name: 'Icecream',
@@ -108,6 +174,15 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/desert/icecream.png',
       price: 3.99,
       category: FoodCategory.dessert,
+      availableAddons: [ 
+        Addon(name:"Brownie Topping", price:0.50),
+        Addon(name:"Chocolate Drizzle", price:0.50),
+        Addon(name:"Strawberry Drizzle", price:0.50),
+        Addon(name:"Caramel Drizzle", price:0.50),
+        Addon(name: "Peanut Butter Cups", price: 0.50),
+        Addon(name: "Whipped Cream", price: 0.50),
+        Addon(name: "Cherry", price: 0.50)
+      ] ,
     ),
     Food(
       name: 'Milkshake',
@@ -115,6 +190,11 @@ class Restaurant extends ChangeNotifier {
       imagePath: 'lib/images/desert/milkshake.png',
       price: 3.99,
       category: FoodCategory.dessert,
+      availableAddons: [ 
+        Addon(name:"Whipped Cream", price:0.50),
+        Addon(name:"Cherry", price:0.50),
+        Addon(name:"Chocolate Drizzle", price:1.20)
+      ] ,
     ),
   ];
 
@@ -167,6 +247,8 @@ class Restaurant extends ChangeNotifier {
         _cart.removeAt(cartIndex);
       }
     }
+   notifyListeners();
+
   }
 
   // get total price of cart
@@ -196,6 +278,15 @@ class Restaurant extends ChangeNotifier {
   }
 
   // clear the cart
+  void clearCart() {
+    _cart.clear();
+    notifyListeners();
+  }
+
+
+
+
+ 
 
   // HELPERS------------------------------------------ 
 
