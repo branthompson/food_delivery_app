@@ -17,9 +17,43 @@ class CartScreen extends StatelessWidget{
         title: Text("Cart"),
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: [
+          //clear cart
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context, 
+                builder: (context) => AlertDialog(
+                  title: const Text("Are you sure you want to clear your cart, all the items will be removed."),
+                  actions: [
+                    //No
+                    TextButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+
+                    }, 
+                    child: const Text("Cancel")),
+                    //Yes!
+                    TextButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                      restaurant.clearCart();
+                    }, 
+                    child: const Text("Yes")),
+
+
+                  ]
+                ),
+                );
+            }, 
+            icon: const Icon(Icons.delete),
+            )
+        ],
       ),
       body: Column(
         children: [
+          userCart.isEmpty ? 
+          const Expanded(child: Text("Your cart is currently empty"),):  
           Expanded(
             child: ListView.builder(
               itemCount: userCart.length,
