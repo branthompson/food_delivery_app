@@ -13,9 +13,15 @@ class CartSquare extends StatelessWidget{
     return Consumer<Restaurant>(
     builder: (context, restaurant, child) =>
       Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary,
+        borderRadius: BorderRadius.circular(8),
+      ),
+        margin: const EdgeInsets.symmetric(horizontal:25, vertical: 10),
         child: Column(
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //food image
                 ClipRRect(
@@ -33,9 +39,13 @@ class CartSquare extends StatelessWidget{
                     //name
                     Text(cartItem.food.name),
                     //price
-                    Text('\$'+ cartItem.food.price.toString()),
+                    Text('\$'+ cartItem.food.price.toString(),
+                    style: TextStyle(color: Theme.of(context).colorScheme.primary)
+                    ),
                   ],
                 ),
+
+                const Spacer(),
                 //increase or decrease amount
                 QuantitySelector(
                 quantity: cartItem.quantity, 
@@ -49,13 +59,48 @@ class CartSquare extends StatelessWidget{
                 },
                ),
             ],
-          )
-
-
+          ),
+            //addons
+            SizedBox(
+              height: cartItem.selectedAddons.isEmpty ? 0:60,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10, ),
+                children: cartItem.selectedAddons
+                .map((addon)=> 
+              
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: FilterChip(
+                    label: Row(
+                      children: [
+                        //name
+                        Text(addon.name),
+                        //price
+                        Text('(\$${addon.price})'),
+                      ],
+                    ),
+                    shape: StadiumBorder(
+                      side: BorderSide(
+                        color: Theme.of(context).colorScheme.primary,                    ),
+                    ), 
+                    onSelected: (value) {},
+                    backgroundColor: 
+                      Theme.of(context).colorScheme.secondary,
+                    labelStyle: TextStyle(
+                      color: 
+                        Theme.of(context).colorScheme.inversePrimary,
+                        fontSize: 11,
+                        ),
+                    ),
+                )).toList(),
+              ),
+            ),
+            
               ],
             ),
       ),
-            //addons
+         
           
         );
   }
