@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:dishdash/models/cart_item.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'food.dart';
 
 class Restaurant extends ChangeNotifier {
@@ -291,7 +292,39 @@ class Restaurant extends ChangeNotifier {
   // HELPERS------------------------------------------ 
 
   // generate receipt (maybe we implement)
+  String displayOrder() {
+    final orderReceipt = StringBuffer();
+    orderReceipt.writeln("These dishes are headed your way.");
+    orderReceipt.writeln();
+
+    //format date of order
+    String orderDate= DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now());
+
+    orderReceipt.writeln(orderDate);
+    orderReceipt.writeln();
+    orderReceipt.writeln();
+
+    for (final cartItem in _cart){
+      orderReceipt.writeln("${cartItem.quantity} x ${cartItem.food.name} - ${_formatPrice(cartItem.food.price)} ");
+   
+    }
+    orderReceipt.writeln();
+    orderReceipt.writeln();
+    orderReceipt.writeln("Total Price:  ${_formatPrice(getTotalPrice())}");
+
+    return orderReceipt.toString();
+  }
 
   // format double value into money
+  String _formatPrice(double price){
+    return "\$${price.toStringAsFixed(2)}";
+  }
 
+
+  //summary of addons on order receipt
+  String _formatAddons(List<Addon> addons){
+    return addons
+    .map((addon)=>"${addon.name} (${_formatPrice(addon.price)})")
+    .join(", ");
+  }
 }
