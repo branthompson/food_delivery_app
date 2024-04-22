@@ -47,13 +47,17 @@ class _PaymentScreenState extends State<PaymentScreen>{
             
             //continue paying
              TextButton(
-            onPressed: () => Navigator.push(
+            onPressed: () { 
+              Navigator.pop(context);
+              Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => DeliveryProgressScreen(),
                 ),
-            ), 
-            child: Text("Yes"))
+            );
+            },
+            child: const Text("Yes")
+            ),
           ],
         ),
       );

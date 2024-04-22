@@ -1,3 +1,4 @@
+import "package:dishdash/components/order_receipt.dart";
 import "package:flutter/material.dart";
 
 class DeliveryProgressScreen extends StatelessWidget{
@@ -6,7 +7,14 @@ class DeliveryProgressScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text("Delivery Progress"),),
+      appBar: AppBar(title: Text("Delivery In Progress..."),
+      backgroundColor: Colors.transparent,
+      ),
+      body: Column(
+        children: [
+          OrderReceipt()
+        ],
+      )
     );
   }
 }
