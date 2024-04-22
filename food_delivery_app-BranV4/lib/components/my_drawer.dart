@@ -1,4 +1,4 @@
-import 'package:dishdash/auth/auth_page.dart';
+import 'package:dishdash/services/auth/auth_page.dart';
 import 'package:dishdash/components/my_drawer_tile.dart';
 import 'package:flutter/material.dart';
 
