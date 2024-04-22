@@ -1,4 +1,4 @@
-import 'package:dishdash/services/auth/auth_page.dart';
+import 'package:dishdash/services/auth/auth_gate.dart';
 import 'package:dishdash/models/restaurant.dart';
 import 'package:dishdash/themes/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: myTheme,
-      home: const AuthPage(),
+      home: const AuthGate(),
     );
   }
 }
