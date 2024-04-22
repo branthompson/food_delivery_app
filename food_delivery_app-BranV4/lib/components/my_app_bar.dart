@@ -1,3 +1,4 @@
+import 'package:dishdash/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget {
@@ -15,8 +16,16 @@ class MyAppBar extends StatelessWidget {
       pinned: true,
       actions: [
         IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.shopping_cart_rounded),
+            onPressed: () {
+              //go to cart screen
+              Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (context) => const CartScreen(),
+              )
+              );
+            },
+            icon: const Icon(Icons.shopping_cart_rounded),
         ),
       ],
       backgroundColor: Theme.of(context).colorScheme.tertiary,
