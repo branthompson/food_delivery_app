@@ -1,4 +1,5 @@
 import 'package:dishdash/components/cart_square.dart';
+import 'package:dishdash/components/my_button.dart';
 import 'package:flutter/material.dart';
 import '../models/restaurant.dart';
 import 'package:provider/provider.dart';
@@ -52,21 +53,36 @@ class CartScreen extends StatelessWidget{
       ),
       body: Column(
         children: [
-          userCart.isEmpty ? 
-          const Expanded(child: Text("Your cart is currently empty"),):  
-          Expanded(
-            child: ListView.builder(
-              itemCount: userCart.length,
-              itemBuilder: (context, index){
-              //gets each cart item
-              final cartItem = userCart[index];
 
-              return CartSquare(cartItem: cartItem);
-      
-
-    },
-    ),
+          //list of cart
+           Expanded(
+            child: Column(
+              children: [
+                userCart.isEmpty ? 
+                const Expanded(child: Text("Your cart is currently empty"),):  
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: userCart.length,
+                    itemBuilder: (context, index){
+                    //gets each cart item
+                    final cartItem = userCart[index];
+            
+                    return CartSquare(cartItem: cartItem);
+            
+            
+                },
+                ),
+                ),
+              ],
+            ),
           ),
+          //pay button
+          MyButton(
+            text: "Checkout", 
+            onTap: (){}),
+
+            const SizedBox(
+              height: 25, 
         ],
       )
     );
