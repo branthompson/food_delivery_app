@@ -46,8 +46,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
       return ListView.builder(
         itemCount: categoryMenu.length,
-          physics: NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
             final food = categoryMenu[index];
 
@@ -63,36 +61,34 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: MyDrawer(),
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          MyAppBar(
-              title: MyTabBar(tabController: _tabController),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Divider(
-                    indent: 25,
-                    endIndent: 25,
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                  ),
-                  // Current Location
-                  MyCurrentLocation(),
-                  // Description Box
-                  MyDescriptionBox(),
-                ],
+Widget build(BuildContext context) {
+  return Scaffold(
+    drawer: MyDrawer(),
+    body: NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+        MyAppBar(
+          title: MyTabBar(tabController: _tabController),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Divider(
+                indent: 25,
+                endIndent: 25,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
-          ),
-        ],
-        body: Consumer<Restaurant>(
-          builder: (context, restaurant, child) => TabBarView(
-            controller: _tabController,
-            children: getFoodInThisCategory(restaurant.menu),
+              MyCurrentLocation(),
+              MyDescriptionBox(),
+            ],
           ),
         ),
+      ],
+      body: Consumer<Restaurant>(
+        builder: (context, restaurant, child) => TabBarView(
+          controller: _tabController,
+          children: getFoodInThisCategory(restaurant.menu),
+        ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
