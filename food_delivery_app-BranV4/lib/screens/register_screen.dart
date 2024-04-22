@@ -1,3 +1,5 @@
+import 'package:dishdash/screens/home_screen.dart';
+import 'package:dishdash/services/auth/auth_services.dart';
 import 'package:flutter/material.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
@@ -16,7 +18,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController pswController = TextEditingController();
   final TextEditingController ConfirmPSWController = TextEditingController();
+  //fill out auth
+  void register() async{
+    final _authService = AuthService();
 
+    //check if passwords match
+    if(pswController.text==ConfirmPSWController.text){
+      try{
+      await _authService.register(emailController.text, pswController.text);
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+
+      }
+
+      catch (e){
+        showDialog(
+          context: context, 
+          builder: (context)=> AlertDialog(
+            title: Text(e.toString()),
+          )
+          );
+      }
+    }
+    else{
+      showDialog(
+          context: context, 
+          builder: (context)=> AlertDialog(
+            title: Text("Your Passwords Don't Match "),
+          ),
+
+          );
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(height: 17),
             MyTextfield(controller: ConfirmPSWController, hintText: 'Confirm Password'),
             SizedBox(height: 17),
-            MyButton(text: 'Register', onTap: () {}),
+            MyButton(text: 'Register', onTap: register),
             SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -1,5 +1,6 @@
 import 'package:dishdash/components/my_button.dart';
 import 'package:dishdash/components/my_textfield.dart';
+import 'package:dishdash/services/auth/auth_services.dart';
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
@@ -20,14 +21,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
   // LOGIN
-  void login() {
+  void login() async{
 
-    /*
+    final _authService = AuthService();
 
-    fill out authentication here
-
-     */
-
+    try{
+      await _authService.signIn(emailController.text, pswController.text);
+    }
+    catch (e){
+      showDialog(
+        context: context, 
+        builder: (context)=> AlertDialog(
+          title: Text(e.toString()),
+        )
+        );
+    }
     // After logging in, Navigate to home screen
     Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()),);
 
