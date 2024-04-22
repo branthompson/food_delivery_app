@@ -1,6 +1,8 @@
 import 'package:dishdash/components/my_button.dart';
+import 'package:dishdash/screens/delivery_progress_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+
 
 class PaymentScreen extends StatefulWidget{
   const PaymentScreen({super.key});
@@ -86,10 +88,10 @@ class _PaymentScreenState extends State<PaymentScreen>{
             cvvCode: cvvNum, 
             onCreditCardModelChange:(data) {
               setState(() {
-                cardNumber: data.cardNumber; 
-                expiryDate: expireDate; 
-                cardHolderName: cardOwner; 
-                cvvCode: data.cvvCode;
+                cardNumber= data.cardNumber; 
+                expireDate= expireDate; 
+                cardOwner= cardOwner; 
+                cvvNum= data.cvvCode;
                 });
             } ,
             formKey: formKey,
