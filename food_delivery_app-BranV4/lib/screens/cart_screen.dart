@@ -1,3 +1,4 @@
+import 'package:dishdash/components/cart_square.dart';
 import 'package:flutter/material.dart';
 import '../models/restaurant.dart';
 import 'package:provider/provider.dart';
@@ -22,11 +23,16 @@ class CartScreen extends StatelessWidget{
           Expanded(
             child: ListView.builder(
               itemCount: userCart.length,
-              itemBuilder: ((context, index) =>
-              ListTile(title: Text(userCart[index].food.name))
-              ),
-            )
-          )
+              itemBuilder: (context, index){
+              //gets each cart item
+              final cartItem = userCart[index];
+
+              return CartSquare(cartItem: cartItem);
+      
+
+    },
+    ),
+          ),
         ],
       )
     );
