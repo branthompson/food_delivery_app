@@ -87,12 +87,25 @@ class _FoodScreenState extends State<FoodScreen> {
                   SizedBox(height: 50),
         
                   // DIVIDER - put addons above divider if doing
-                  Divider(
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    endIndent: 20,
-                    indent: 20,
-                  ),
-        
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount:widget.food.availableAddons.length,
+                    itemBuilder: (context, index){
+                      Addon addon= widget.food.availableAddons[index];
+
+                      return CheckboxListTile(
+                        title: Text(addon.name),
+                        subtitle: Text(addon.price.toString()),
+                        value: widget.selectedAddons[addon] ?? false,
+                        onChanged: (bool? value) {
+                              setState(() {
+                                 widget.selectedAddons[addon] = value ?? false; // Update the state when the checkbox is toggled
+                            });
+      }
+    );
+  },
+),
+
                   SizedBox(height: 10),
         
                   // BUTTON -> ADD TO CART----------

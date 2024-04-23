@@ -11,58 +11,75 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<Restaurant>(
-      builder:(context, restaurant, child){
-      final userCart=restaurant.cart;
+      builder: (context, restaurant, child) {
+        final userCart = restaurant.cart;
 
-      return Scaffold(
-        appBar: AppBar(
-          title: Text("Cart"),
-          backgroundColor: Colors.transparent,
-          foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-          actions: [
-            //clear cart
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-                restaurant.clearCart();
-              }, 
-              icon: const Icon(Icons.delete),
+        // Calculate the total price
+        double totalPrice = userCart.fold(0, (sum, current) => sum + (current.food.price * current.quantity));
+
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Cart"),
+            backgroundColor: Colors.transparent,
+            foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  restaurant.clearCart();
+                },
+                icon: const Icon(Icons.delete),
               ),
-              
-          ],
-        ),
-        body: Column(
-          children: [
-
-            //
-            Expanded(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: userCart.length,
-                      itemBuilder:(context, index){ 
-                      final cartItem = userCart[index];
-                      return MyCartSection(cartItem:cartItem);
-                      
-                      },
+            ],
+          ),
+          body: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: userCart.length,
+                  itemBuilder: (context, index) {
+                    final cartItem = userCart[index];
+                    return MyCartSection(cartItem: cartItem);
+                  },
+                ),
+              ),
+              // Display total price
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Total Price:',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                ],
+                    Text(
+                      '\$${totalPrice.toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            //pay button
-            MyButton(
-              text: "Checkout", 
-              onTap: (){
-                Navigator.of(context).push(
+              // Checkout button
+              MyButton(
+                text: "Checkout",
+                onTap: () {
+                  Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const PaymentScreen())
-                );
-              }
+                  );
+                }
               ),
-          ],
-        )
-      );
-    });
+            ],
+          )
+        );
+      }
+    );
   }
 }
