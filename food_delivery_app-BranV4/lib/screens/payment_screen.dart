@@ -1,18 +1,16 @@
-import 'package:dishdash/components/my_button.dart';
-import 'package:dishdash/screens/delivery_progress_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:dishdash/screens/delivery_progress_screen.dart';
+import 'package:dishdash/components/my_button.dart';
 
-
-class PaymentScreen extends StatefulWidget{
+class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
 
-  @override 
-  State<PaymentScreen> createState()=> _PaymentScreenState();
+  @override
+  State<PaymentScreen> createState() => _PaymentScreenState();
 }
 
-
-class _PaymentScreenState extends State<PaymentScreen>{
+class _PaymentScreenState extends State<PaymentScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String cardNumber = '';
@@ -20,94 +18,84 @@ class _PaymentScreenState extends State<PaymentScreen>{
   String cardOwner= '';
   String cvvNum= '';
   bool isCvvSelected= false;
-  //user taps pay now
-  void userTappedPay(){
-    if(formKey.currentState!.validate()){
-      //show confirm dialog if form info is valid
+
+  void userTappedPay() {
+    if (formKey.currentState!.validate()) {
       showDialog(
         context: context,
-        builder: (context)=> AlertDialog(
+        builder: (context) => AlertDialog(
           title: const Text("Confirm"),
-          content: SingleChildScrollView(
-            child: ListView(
-              children: [
-                Text("Card Number: $cardNumber"),
-                Text("Expire Date: $expireDate"),
-                Text("Card Owner Name: $cardOwner"),
-                Text("CVV: $cvvNum"),
-              ],
-            ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min, // Ensures it takes minimum space
+            children: [
+              Text("Card Number: $cardNumber"),
+              Text("Expire Date: $expireDate"),
+              Text("Card Owner Name: $cardOwner"),
+              Text("CVV: $cvvNum"),
+            ],
           ),
           actions: [
-            //cancel payment
             TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("Cancel")
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Cancel"),
             ),
-            
-            //continue paying
-             TextButton(
-            onPressed: () { 
-              Navigator.pop(context);
-              Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DeliveryProgressScreen(),
-                ),
-            );
-            },
-            child: const Text("Yes")
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DeliveryProgressScreen()),
+                );
+              },
+              child: const Text("Yes"),
             ),
           ],
         ),
       );
     }
   }
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Checkout"),
       ),
-      body: Column(
-        children: [
-          //payment info
-          CreditCardWidget(
-            cardNumber: cardNumber, 
-            expiryDate: expireDate, 
-            cardHolderName: cardOwner, 
-            cvvCode: cvvNum, 
-            showBackView: isCvvSelected, 
-            onCreditCardWidgetChange:(p0) {} ,
+      body: SingleChildScrollView(  // Ensures the entire screen can scroll
+        child: Column(
+          children: [
+            CreditCardWidget(
+              cardNumber: cardNumber,
+              expiryDate: expireDate,
+              cardHolderName: cardOwner,
+              cvvCode: cvvNum,
+              showBackView: isCvvSelected,
+              onCreditCardWidgetChange: (p0) {},
             ),
-            
-          //payment form
-          CreditCardForm(
-            cardNumber: cardNumber, 
-            expiryDate: expireDate, 
-            cardHolderName: cardOwner, 
-            cvvCode: cvvNum, 
-            onCreditCardModelChange:(data) {
-              setState(() {
-                cardNumber= data.cardNumber; 
-                expireDate= expireDate; 
-                cardOwner= cardOwner; 
-                cvvNum= data.cvvCode;
+            CreditCardForm(
+              cardNumber: cardNumber,
+              expiryDate: expireDate,
+              cardHolderName: cardOwner,
+              cvvCode: cvvNum,
+              onCreditCardModelChange: (data) {
+                setState(() {
+                  cardNumber = data.cardNumber;
+                  expireDate = data.expiryDate;
+                  cardOwner = data.cardHolderName;
+                  cvvNum = data.cvvCode;
                 });
-            } ,
-            formKey: formKey,
-          ),
-          const Spacer(),
-          MyButton(onTap: userTappedPay,
-           text: "Pay Now",
-           ),
-           const SizedBox(
-            height: 25,
-           ),
-        ],
+              },
+              formKey: formKey,
+            ),
+            const SizedBox(height: 20),
+            MyButton(
+              text: "Pay Now",
+              onTap: userTappedPay,
+            ),
+            const SizedBox(height: 25),
+          ],
+        ),
       ),
     );
   }
